@@ -1,0 +1,155 @@
+.home{
+    .error{
+        color:#ff5050;
+        text-indent: 40px;
+    }
+    .title{
+        position: sticky; 
+        position: -webkit-sticky; 
+        bottom: 0; 
+        background-color: #12C287;
+        line-height: 80px;
+        height: 80px;
+        vertical-align: middle;
+        text-align: center;
+        color:#fff;
+        font-size: 28px;
+        display: flex;
+        .left{
+            width:100px; 
+        }
+        .right{
+            width:100px;
+        }
+        .arrow_left{
+            line-height: 80px;
+            height: 80px;
+            width:100px;
+            &:before{
+                content: "";
+                display: inline-block;
+                width: 12px;
+                height: 12px;
+                border-left: solid 2px #fff;
+                border-top: solid 2px #fff;
+                -webkit-transform: rotate(-45deg);
+                -ms-transform: rotate(-45deg);
+                transform: rotate(-45deg);
+                left: 0px;
+                top: 0px;
+            }
+        }
+        .arrow_right{
+            line-height: 80px;
+            height: 80px;
+            width:100px;
+            &:before{
+                content: "";
+                display: inline-block;
+                width: 12px;
+                height: 12px;
+                border-right: solid 2px #fff;
+                border-bottom: solid 2px #fff;
+                -webkit-transform: rotate(-45deg);
+                -ms-transform: rotate(-45deg);
+                transform: rotate(-45deg);
+                left: 0px;
+                top: 0px;
+            }
+        }
+        .title_txt{
+            flex:1;
+        }
+    }
+    .body{
+        background:#fff;
+        .application{
+            .b_title{
+                font-size: 28px;
+                color: #282828;
+                text-align: center;
+                background-color: #fafafa;
+                font-weight: normal;
+                height: 70px;
+                line-height: 70px;
+                vertical-align: middle;
+            }
+            .ap_info > ul {
+                padding:0;
+                margin:0 0 0 30px;
+                & > li{
+                    list-style: none;
+                    background-image: linear-gradient(to bottom, transparent 50%, #e6e6e6 50%);
+                    background-position: 0 bottom;
+                    background-repeat: repeat-x;
+                    background-size: 1px 1px;
+                    width:100%;
+                    display: table;
+                    & > div{
+                        display:table-cell;
+                        line-height: 80px;
+                        height: 80px;
+                        vertical-align: middle;
+                        color: #787878;
+                        font-size:30px;
+                        word-break: break-all;
+                    }
+                    & > div:first-child {
+                        width:25%;
+                        text-indent: 20px;
+                    }
+                }
+            }
+        }
+    }
+    .product_buy{
+        position: fixed; 
+        bottom: 0; 
+        background:#fff;
+        display: flex;
+        width: 100%;
+        .buy_price{
+            color: #ff5050;
+            font-weight: bold;
+            line-height: 80px;
+            height: 80px;
+            vertical-align: middle;
+            padding: 10px 20px 0 40px;
+            &>span{
+              font-size:35px;
+            }
+          }
+        &>div:first-child{
+          width: 80%;
+        }
+        .buy_button{
+          background: #12c286;
+          display: block;
+          width: 300px;
+          line-height: 80px;
+          height: 80px;
+          vertical-align: middle;
+          text-align: center;
+          border-radius: 10px;
+          margin: 10px;
+          color:#fff;
+          font-size: 26px;
+          &>a{
+            color:#fff;
+            text-decoration: none;
+          }
+        }
+      }
+    .article{
+        font-size: 26px;
+        margin: 20px;
+        line-height: 50px;
+        vertical-align: middle;
+        color: #787878;
+        text-indent: 24px;
+        & > a{
+            color:#12c286;
+            text-decoration: none;
+        }
+    }
+}

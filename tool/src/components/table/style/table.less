@@ -1,0 +1,40 @@
+.application{
+    .b_title{
+        font-size: 28px;
+        color: #282828;
+        text-align: center;
+        background-color: #fafafa;
+        font-weight: normal;
+        height: 70px;
+        line-height: 70px;
+        vertical-align: middle;
+    }
+    .ap_info > ul {
+        padding:0;
+        margin:0 0 0 30px;
+        & > li{
+            list-style: none;
+            background-image: linear-gradient(to bottom, transparent 50%, #e6e6e6 50%);
+            background-position: 0 bottom;
+            background-repeat: repeat-x;
+            background-size: 1px 1px;
+            width:100%;
+            display: table;
+            & > div{
+                display:table-cell;
+                line-height: 80px;
+                height: 80px;
+                vertical-align: middle;
+                color: #787878;
+                font-size:28px;
+                overflow: hidden;
+                word-break: break-all;
+            }
+            & > div:first-child {
+                width:25%;
+                text-indent: 20px;
+            }
+            
+        }
+    }
+}

@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html>
+    <header>
+        <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+        <script src="https://cdn.bootcss.com/crypto-js/3.1.9-1/crypto-js.min.js"></script>
+
+
+        <style>
+            body{
+                padding: 0;
+                margin: 0;
+            }
+            .enterInfo{
+                width:600px;
+                padding:0;
+                margin: 0;
+            }
+            .enterInfo dt{
+                text-align: center;
+                height: 60px;
+                line-height: 60px;
+                font-size: 22px;
+            }
+            .enterInfo dd{
+                margin: 0;
+                padding:0;
+                text-align: center;
+                height: 60px;
+                line-height: 60px;
+                font-size: 28px;
+                display: table;
+                width:100%;
+            }
+            .enterInfo dd > div{
+                text-align: center;
+                height: 60px;
+                line-height: 60px;
+                font-size: 22px;
+                display: table-cell;
+            }
+            .enterInfo dd > div:first-child{
+                font-size: 14px;
+                width: 20%;
+            }
+            .enterInfo dd > div:first-child input{
+                font-size: 14px;
+                width: 80%;
+                height: 30px;
+                line-height: 30px;
+                vertical-align: middle;
+                text-indent: 10px;
+            }
+            .enterInfo dd > div:nth-child(2){
+                font-size: 14px;
+                width: 60%;
+            }
+            .enterInfo dd > div:last-child{
+                font-size: 14px;
+                width: 20%;
+
+            }
+            .enterInfo dd > div:last-child span{
+                font-size: 14px;
+                display: block;
+                border-radius: 5px;
+                width:80px;
+                margin-left: 20px;
+                height: 30px;
+                line-height: 30px;
+                vertical-align: middle;
+                background:#dfdfdf;
+            }
+            .enterInfo dd > div:nth-child(2) input{
+                font-size: 14px;
+                width: 100%;
+                height: 30px;
+                line-height: 30px;
+                vertical-align: middle;
+                text-indent: 10px;
+            }
+            .submit{
+                border-radius: 5px;
+                height: 40px;
+                line-height: 40px;
+                background:#12c287;
+                color:#fff;
+                display: block;
+                width:40%;
+                display: inline-block;
+            }
+            .plugins{
+                width:600px;
+                margin: 0 0 0 30px;
+                height: 200px;
+            }
+            .ctitle{
+                text-indent: 30px;
+                margin: 10px 0;
+            }
+        </style>
+        
+    </header>
+    <body>
+    <dl class="enterInfo" id="enterInfo">
+        <dt>信息输入</dt>
+        <dd>
+                <div>身份证</div>
+                <div>
+                    <input id="idcard" value="3101091987766237890" disabled/>
+                </div>
+                <div></div>
+            </dd>
+            
+            <dd>
+                    <div>身份证秘文</div>
+                    <div>
+                            <input id="idpw" value="Ab7823#!8&123d136" disabled/>
+                    </div>
+                    <div></div>
+                </dd>
+        <dd>
+            <div>姓名</div>
+            <div>
+                <input type="text" id="name" placeholder="请输入"/>
+                <span style="display:none;" id="namepw"></span>
+            </div>
+            <div>
+                <span onclick="namepw()">加密</span>
+            </div>
+        </dd>
+
+        <!-- <dd>
+            <div>证件类型</div>
+            <div>
+                <input type="text" id="type" placeholder="请输入"/>
+            </div>
+            <div><span>加密</span></div>
+        </dd>
+        <dd>
+            <div>证件号码</div>
+            <div>
+                <input type="text" id="cid" placeholder="请输入"/>
+            </div>
+            <div><span>加密</span></div>
+        </dd> -->
+        <dd>
+            <div>手机号码</div>
+            <div>
+                <input type="text" id="mid" placeholder="请输入"/>
+                <span id="midpw" style="display:none;"></span>
+            </div>
+            <div><span onClick="mobilepw()">加密</span></div>
+        </dd>
+    </dl>
+    <dl  class="enterInfo">
+        <dd>
+            <div></div>
+            <div>
+                <span class="submit" style="margin-right:20px;" onclick="submitValue()">确认</span>
+                <span class="submit" style="margin-right:20px;" onclick="addlist()">添加更多</span>
+            </div>
+            <div></div>
+        </dd>
+    </dl>
+
+    <!-- <img src="/qr?text=73827382732312"/> -->
+
+    <div id="createplugins" style="display: none;">
+        <div class="ctitle">生成组件</div>
+        <textarea id="plugins" class="plugins" ></textarea>
+    </div>
+    <script type="text/javascript">
+        
+    function encrypt (word) {
+        var key = CryptoJS.enc.Utf8.parse("46cc793c53dc451b");
+        var srcs = CryptoJS.enc.Utf8.parse(word);
+        var encrypted = CryptoJS.AES.encrypt(srcs, key, {
+            mode: CryptoJS.mode.ECB,
+            padding: CryptoJS.pad.Pkcs7
+        });
+        return encrypted.toString();
+    }
+    function decrypt () {
+        var key = CryptoJS.enc.Utf8.parse("46cc793c53dc451b");
+        var decrypt = CryptoJS.AES.decrypt(word, key, {
+            mode: CryptoJS.mode.ECB,
+            padding: CryptoJS.pad.Pkcs7
+        });
+        return CryptoJS.enc.Utf8.stringify(decrypt).toString();
+    }
+
+    function namepw (e) {
+        var mid = document.getElementById('name')
+        var midpw = document.getElementById('namepw')
+        if(mid.value) {
+            midpw.style.display= 'block'
+            midpw.innerHTML = encrypt(mid.value)
+        }
+    }
+    function mobilepw (e) {
+        var mid = document.getElementById('mid')
+        var midpw = document.getElementById('midpw')
+        if(mid.value) {
+            midpw.style.display= 'block'
+            midpw.innerHTML = encrypt(mid.value)
+        }
+    }
+
+    function mobilepw (e) {
+        var mid = document.getElementById('mid')
+        var midpw = document.getElementById('midpw')
+        if(mid.value) {
+            midpw.style.display= 'block'
+            midpw.innerHTML = encrypt(mid.value)
+        }
+    }
+
+        function submitValue (e) {
+            var name = document.getElementById('namepw').innerHTML
+            var type = document.getElementById('idpw').value
+            var cid  = document.getElementById('cid') ? document.getElementById('cid').innerHTML : '';
+            var mid  = document.getElementById('midpw').innerHTML
+
+            axios.post('/user', {
+                params:  {
+                    id: +new Date(), 
+                    name, type, cid, mid}
+            })
+            .then(function (response) {
+                // handle success
+                if (response.data.state === 'success') {
+                    document.getElementById('createplugins').style.display = 'block'
+                    document.getElementById('plugins').value = response.data.txt
+                }
+                console.log(response);
+            })
+            .catch(function (error) {
+                // handle error
+                console.log(error);
+            })
+            .finally(function () {
+                // always executed
+            });
+        }
+        function createPlugins(e) {
+        }
+        function addlist(){
+            var enterInfo = document.getElementById('enterInfo'); 
+            var Ele = new ele()
+            enterInfo.append(Ele.root)
+        }
+
+        function ele (label = '', id='cid') {
+            var _self = this
+            this.root = document.createElement('dd')
+            this.first = document.createElement('div')
+            this.two = document.createElement('div')
+            
+            this.pw = document.createElement('span')
+            this.pw.style.display= 'none'
+            
+            this.three = document.createElement('div')
+            this.password = document.createElement('span')
+            this.password.innerHTML = '加密'
+            this.label = document.createElement('input')
+            this.label.type = 'text'
+            this.label.placeholder = '请输入'
+            this.label.value = label
+
+            this.label2 = document.createElement('input')
+            
+            this.label2.type = 'text'
+            this.label2.placeholder = '请输入'
+            this.three.append(this.password)
+            this.root.append(this.first)
+            this.root.append(this.two)
+            this.root.append(this.three)
+            this.first.append(this.label)
+            this.two.append(this.label2)
+            this.two.append(this.pw)
+            this.pw.id = id
+            this.password.onclick = function () {
+                if(_self.label2.value) {
+                    _self.pw.style.display= 'block'
+                    _self.pw.innerHTML = encrypt(_self.label2.value)
+                }
+            }
+        }
+    </script>
+    </body>
+</html>
